@@ -1,0 +1,125 @@
+CUSTOMER CHURN PREDICTION - RAPPORT DE VALIDATION FINALE
+
+1. Date et contexte du test
+Date : 2026-08-14
+Environnement : Windows, Python 3.11.8, pytest 9.1.1, Docker Desktop avec moteur Linux.
+Projet valide en lecture seule depuis C:\customer-churn-prediction. Aucun fichier source, modele, seuil ou artefact ML n'a ete modifie. Seul ce rapport a ete cree.
+Perimetre : depot, dependances, imports, tests automatises, modele serialise, API FastAPI locale, image Docker, endpoints, interface web, entrees valides/invalides, valeurs limites, parite et seuil operationnel.
+
+2. Version/image Docker testee
+Image : customer-churn-api:1.0.0
+Image ID : sha256:4f20d270e807151c62805efe98710bf0e56d3c066782861c44356d632560b142
+Taille : 264067928 octets
+Conteneur temporaire : customer-churn-final-validation, port hote 8010 vers port 8000.
+Utilisateur du conteneur : app (non-root).
+
+3. Resultat des tests automatises
+Commande : python -m pytest -ra --durations=10
+Tests collectes : 39
+Tests reussis : 39
+Tests echoues : 0
+Subtests rapportes par pytest : aucun
+Warnings rapportes : aucun
+Duree pytest : 67.68 s (environ 1 min 08 s)
+Suites couvertes : API, feature engineering, pipeline final, amelioration, modelisation et preprocessing.
+Controle additionnel : python -m pip check -> No broken requirements found.
+Imports api.main et customer_churn_prediction.final_pipeline -> OK.
+
+4. Resultat Docker
+L'image attendue existe et a demarre correctement.
+Etat apres demarrage : running=true, health=healthy, restart count=0.
+Logs de startup : serveur Uvicorn demarre, attente terminee, application startup complete, ecoute sur 0.0.0.0:8000.
+Aucune trace ERROR, Traceback ou Exception observee au demarrage ou pendant les tests.
+Accessibilite HTTP confirmee sur http://127.0.0.1:8010.
+Arret : propre, running=false, exit code=0. Le conteneur temporaire a ensuite ete supprime ; aucun conteneur de validation ne subsiste.
+
+5. Health endpoint
+GET /health local : HTTP 200.
+GET /health Docker : HTTP 200.
+Reponse Docker : {"status":"ok","model_loaded":true,"model_version":"1.0.0"}.
+Conclusion : API disponible et modele charge/pret.
+
+6. Scenario High Risk
+Profil exact demande soumis a l'API.
+FastAPI locale : HTTP 200.
+Docker : HTTP 200.
+Probabilite : 0.7877771751334054 (78.78 %).
+Prediction : 1 ; label : Churn ; seuil : 0.30.
+La probabilite appartient a [0,1], est superieure ou egale a 0.30 et la classe Churn est coherente. Le resultat correspond au test manuel attendu d'environ 78.8 %.
+
+7. Scenario Low Risk
+Profil exact demande soumis a l'API.
+FastAPI locale : HTTP 200.
+Docker : HTTP 200.
+Probabilite : 0.009659648641178586 (0.97 %).
+Prediction : 0 ; label : No Churn ; seuil : 0.30.
+La probabilite appartient a [0,1], est inferieure a 0.30 et la classe No Churn est coherente. Le resultat correspond au test manuel attendu d'environ 1.0 %.
+
+8. Tests autour du seuil
+Recherche deterministe par inference uniquement sur 1314 profils valides ; aucun entrainement ni changement d'artefact.
+Profil immediatement sous le seuil trouve : probability=0.2995019271707126, prediction=0, No Churn. Parametres distinctifs : tenure=41, Contract=One year, MonthlyCharges=80, TotalCharges=3280.
+Profil immediatement au-dessus du seuil trouve : probability=0.3003463237663761 (Docker : 0.30034632376637616), prediction=1, Churn. Parametres distinctifs : tenure=59, Contract=One year, MonthlyCharges=80, TotalCharges=4720.
+Regle validee : probability < 0.30 -> No Churn ; probability >= 0.30 -> Churn.
+
+9. Entrees invalides
+Chaque scenario a ete teste sur FastAPI locale et Docker. Tous ont retourne HTTP 422 et le serveur est reste stable :
+- champ obligatoire tenure manquant : 422 / 422, erreur de validation geree ;
+- categorie Contract inconnue (Lifetime) : 422 / 422, erreur geree ;
+- tenure=-1 : 422 / 422, erreur geree ;
+- MonthlyCharges=-0.01 : 422 / 422, erreur geree ;
+- TotalCharges=-0.01 : 422 / 422, erreur geree ;
+- SeniorCitizen avec mauvais type ("senior") : 422 / 422, erreur geree ;
+- payload vide : 422 / 422, erreur geree ;
+- JSON mal forme : 422 / 422, erreur geree.
+Aucun crash, redemarrage ou HTTP 500 observe.
+
+10. Valeurs limites
+tenure=0 et TotalCharges=0 : HTTP 200 ; probability=0.8186591955674345 ; Churn.
+MonthlyCharges=0 et TotalCharges=0 : HTTP 200 ; probability=0.9723142513017281 ; Churn.
+Valeurs syntaxiquement valides elevees (tenure=120, MonthlyCharges=10000, TotalCharges=1000000) : HTTP 200 ; probability=1.8874617453178038e-44 ; No Churn.
+L'API reste stable pour les trois cas. La validation confirme la robustesse technique du schema, sans affirmer la plausibilite metier des valeurs extremes.
+
+11. Parite Python/API/Docker
+Comparaison realisee sur sept profils valides : High Risk, Low Risk, juste sous le seuil, juste au-dessus du seuil, tenure zero, charges zero et valeurs numeriques elevees.
+Pour chaque profil, probabilite, classe et seuil ont ete compares entre pipeline Python serialise, FastAPI locale et API Docker.
+Classes et seuils : identiques dans tous les cas.
+Ecart numerique maximal de probabilite : 5.551115123125783e-17.
+Cet ecart ne concerne qu'un arrondi flottant sur le profil juste au-dessus du seuil ; tous les autres ecarts sont exactement 0.0.
+POST /predict/batch Docker avec quatre profils : HTTP 200, count=4.
+
+12. Validation de l'interface
+GET / : HTTP 200 local et Docker ; type text/html ; 8508 octets dans Docker.
+GET /static/css/app.css : HTTP 200 local et Docker ; type text/css ; 9944 octets.
+GET /static/js/app.js : HTTP 200 local et Docker ; type application/javascript ; 6196 octets.
+Marqueurs verifies : formulaire churn-form, bouton predict-button, chargement d'exemple, rendu showResult et controles de sante.
+Le JavaScript appelle directement fetch("/predict") pour la prediction et fetch("/health") pour la disponibilite. Aucun endpoint fictif ou mock de production n'a ete detecte.
+
+13. Hash du modele
+SHA-256 local : 1E90B4D71CB43D0778C816A7101836649EF53E92597FEF5AB5BA05EA2DA86B40
+SHA-256 dans Docker (/app/models/churn_pipeline.joblib) : 1e90b4d71cb43d0778c816a7101836649ef53e92597fef5ab5ba05ea2da86b40
+Conclusion : hashes identiques (la casse hexadecimale est sans effet). Le meme artefact est utilise localement et dans Docker.
+Integrite informative des donnees : raw SHA-256=16320C9C1EC72448DB59AA0A26A0B95401046BEF5D02FD3AEB906448E3055E91 ; processed SHA-256=7DD93BBFF704F59A3044237C6695F4CFB2EE1B6FAFF6C21265B2E4044195CBD8.
+
+14. Verification du seuil 0.30
+Valeur du metadata modele : 0.3.
+Constante pipeline final OPERATIONAL_THRESHOLD : 0.30.
+Constante de selection historique SELECTED_THRESHOLD : 0.30.
+Validation de chargement API : metadata threshold exige a 0.30.
+Reponses /predict et /model-info : threshold=0.3.
+Tests automatises : assertions explicites a 0.30.
+Interface : limite basse de presentation a 0.30 et decision affichee issue de la reponse API.
+Les mentions de 0.50 dans les metriques sont des comparaisons d'evaluation documentees, pas le seuil operationnel.
+Conclusion : aucune incoherence operationnelle ; la decision finale utilise 0.30.
+
+15. Liste des anomalies eventuelles
+Anomalie critique : aucune.
+Observation non bloquante de gouvernance : git status --short affiche l'ensemble des fichiers du projet comme non suivis (repository initialise mais index Git apparemment vide). Aucun fichier n'a ete ajoute ou modifie pour corriger cet etat, conformement a la consigne.
+Incident de validation sans impact projet : le premier essai du script direct a fourni les colonnes dans un ordre different du schema appris et a ete refuse par le pipeline. Le script externe a ete relance avec model.feature_names_in_ ; l'API et le code du projet n'ont pas ete modifies.
+Observation de configuration : le projet utilise pyproject.toml pour ses dependances ; l'absence de requirements.txt n'est pas une erreur.
+
+16. Verdict final
+39 tests automatises reussis sur 39, auxquels s'ajoutent 31 controles/scenarios fonctionnels et techniques documentes, soit 70 validations comptabilisees.
+Toutes les fonctions critiques testees sont operationnelles : modele, API locale, Docker, validation des entrees, seuil, parite et interface.
+Aucune anomalie critique ne subsiste dans le perimetre teste.
+
+FINAL VALIDATION: PASS

@@ -1,0 +1,43 @@
+{
+  "model_name": "Logistic Regression",
+  "model_version": "1.0.0",
+  "threshold": 0.3,
+  "positive_class": 1,
+  "feature_count": 72,
+  "training_rows": 5634,
+  "selected_hyperparameters": {
+    "C": 2.0,
+    "solver": "lbfgs",
+    "penalty": "l2",
+    "class_weight": null,
+    "max_iter": 2000
+  },
+  "metrics_test": {
+    "roc_auc": 0.8429460848898188,
+    "average_precision": 0.6379086489139305,
+    "0.50": {
+      "threshold": 0.5,
+      "accuracy": 0.8048261178140526,
+      "precision": 0.6655518394648829,
+      "recall": 0.5320855614973262,
+      "f1": 0.5913818722139673,
+      "tn": 935,
+      "fp": 100,
+      "fn": 175,
+      "tp": 199
+    },
+    "0.30": {
+      "threshold": 0.3,
+      "accuracy": 0.7608232789212207,
+      "precision": 0.5347091932457786,
+      "recall": 0.7620320855614974,
+      "f1": 0.6284454244762955,
+      "tn": 787,
+      "fp": 248,
+      "fn": 89,
+      "tp": 285
+    }
+  },
+  "training_scope": "train_only",
+  "test_rows": 1409
+}

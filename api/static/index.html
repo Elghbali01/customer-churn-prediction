@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Customer churn risk assessment powered by a validated machine learning pipeline.">
+  <title>Customer Churn Prediction</title>
+  <link rel="stylesheet" href="/static/css/app.css">
+  <script src="/static/js/app.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="Customer Churn Prediction home">
+      <span class="brand-mark" aria-hidden="true">CP</span>
+      <span>ChurnPulse</span>
+    </a>
+    <div id="service-status" class="service-status checking" role="status" aria-live="polite">
+      <span class="status-dot" aria-hidden="true"></span><span>Checking model…</span>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" aria-labelledby="page-title">
+      <div class="eyebrow">Customer intelligence · ML decision support</div>
+      <h1 id="page-title">Customer Churn Prediction</h1>
+      <p>Assess telecom customer retention risk with a validated machine learning pipeline and an operational 30% decision threshold.</p>
+      <div class="hero-meta" aria-label="Model overview">
+        <span>Logistic Regression</span><span>19 customer inputs</span><span>Real-time assessment</span>
+      </div>
+    </section>
+
+    <div class="workspace">
+      <section class="form-card" aria-labelledby="form-title">
+        <div class="card-heading">
+          <div><span class="step">01</span><h2 id="form-title">Customer information</h2></div>
+          <p>Complete the profile below or load a realistic example.</p>
+        </div>
+
+        <form id="churn-form" novalidate>
+          <div id="form-error" class="alert error hidden" role="alert"></div>
+
+          <fieldset>
+            <legend><span>Customer profile</span><small>Household and demographic context</small></legend>
+            <div class="field-grid cols-3">
+              <label>Gender<select name="gender" required><option value="Female">Female</option><option value="Male">Male</option></select></label>
+              <label>Senior citizen<select name="SeniorCitizen" required><option value="0">No</option><option value="1">Yes</option></select></label>
+              <label>Partner<select name="Partner" required><option>No</option><option>Yes</option></select></label>
+              <label>Dependents<select name="Dependents" required><option>No</option><option>Yes</option></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>Account information</span><small>Relationship and contract details</small></legend>
+            <div class="field-grid cols-3">
+              <label>Tenure <span class="unit">months</span><input name="tenure" type="number" min="0" step="1" required value="1"></label>
+              <label>Contract<select name="Contract" required><option>Month-to-month</option><option>One year</option><option>Two year</option></select></label>
+              <label>Paperless billing<select name="PaperlessBilling" required><option>Yes</option><option>No</option></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>Phone services</span><small>Voice service configuration</small></legend>
+            <div class="field-grid cols-2">
+              <label>Phone service<select id="phone-service" name="PhoneService" required><option>Yes</option><option>No</option></select></label>
+              <label>Multiple lines<select id="multiple-lines" name="MultipleLines" required><option>No</option><option>Yes</option><option>No phone service</option></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>Internet services</span><small>Connectivity and add-on subscriptions</small></legend>
+            <div class="field-grid cols-3">
+              <label>Internet service<select id="internet-service" name="InternetService" required><option>Fiber optic</option><option>DSL</option><option>No</option></select></label>
+              <label>Online security<select class="internet-addon" name="OnlineSecurity" required><option>No</option><option>Yes</option><option>No internet service</option></select></label>
+              <label>Online backup<select class="internet-addon" name="OnlineBackup" required><option>No</option><option>Yes</option><option>No internet service</option></select></label>
+              <label>Device protection<select class="internet-addon" name="DeviceProtection" required><option>No</option><option>Yes</option><option>No internet service</option></select></label>
+              <label>Tech support<select class="internet-addon" name="TechSupport" required><option>No</option><option>Yes</option><option>No internet service</option></select></label>
+              <label>Streaming TV<select class="internet-addon" name="StreamingTV" required><option>No</option><option>Yes</option><option>No internet service</option></select></label>
+              <label>Streaming movies<select class="internet-addon" name="StreamingMovies" required><option>No</option><option>Yes</option><option>No internet service</option></select></label>
+            </div>
+          </fieldset>
+
+          <fieldset>
+            <legend><span>Billing &amp; payment</span><small>Charges and payment preference</small></legend>
+            <div class="field-grid cols-3">
+              <label>Monthly charges <span class="unit">USD</span><input name="MonthlyCharges" type="number" min="0" step="0.01" required value="0"></label>
+              <label>Total charges <span class="unit">USD</span><input name="TotalCharges" type="number" min="0" step="0.01" required value="0"></label>
+              <label>Payment method<select name="PaymentMethod" required><option>Electronic check</option><option>Bank transfer (automatic)</option><option>Credit card (automatic)</option><option>Mailed check</option></select></label>
+            </div>
+          </fieldset>
+
+          <div class="form-actions">
+            <button id="predict-button" class="button primary" type="submit"><span>Predict Churn Risk</span><span class="button-arrow" aria-hidden="true">→</span></button>
+            <button id="load-example" class="button secondary" type="button">Load Example</button>
+            <button id="reset-form" class="button ghost" type="button">Reset</button>
+          </div>
+        </form>
+      </section>
+
+      <aside id="result-panel" class="result-card" aria-labelledby="result-title" aria-live="polite">
+        <div class="result-empty" id="result-empty">
+          <span class="step">02</span>
+          <div class="empty-visual" aria-hidden="true"><span></span><span></span><span></span><span></span></div>
+          <h2 id="result-title">Churn risk assessment</h2>
+          <p>Your prediction will appear here after the customer profile is submitted.</p>
+        </div>
+
+        <div id="result-content" class="result-content hidden">
+          <div class="result-topline"><span class="step">02</span><span id="risk-badge" class="risk-badge">Risk</span></div>
+          <div class="probability-ring" id="probability-ring" role="img" aria-label="Churn probability">
+            <div><strong id="probability-value">0%</strong><span>churn probability</span></div>
+          </div>
+          <div class="prediction-summary">
+            <span>Prediction</span><strong id="prediction-label">—</strong>
+          </div>
+          <dl class="result-details">
+            <div><dt>Risk level</dt><dd id="risk-level">—</dd></div>
+            <div><dt>Decision threshold</dt><dd id="threshold-value">30%</dd></div>
+            <div><dt>Model output</dt><dd id="prediction-code">—</dd></div>
+          </dl>
+          <div class="threshold-note">
+            <strong>Why 30%?</strong>
+            <p>The operational threshold was selected during model validation to improve churn detection. A probability at or above 30% is classified as Churn.</p>
+          </div>
+          <button id="new-prediction" class="button secondary full" type="button">Start a New Prediction</button>
+        </div>
+      </aside>
+    </div>
+
+    <p class="disclaimer">This prediction is decision-support information and should not be interpreted as a causal explanation or guaranteed customer behavior.</p>
+  </main>
+
+  <footer><span>Customer Churn Prediction · Portfolio ML System</span><a href="/docs">API documentation</a></footer>
+</body>
+</html>

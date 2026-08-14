@@ -1,0 +1,73 @@
+feature,mean_abs_shap
+tenure,1.1760331067
+MonthlyCharges,0.6648954630
+Contract_Two year,0.3147418520
+TotalCharges,0.2987410349
+Contract_Month-to-month,0.2915413187
+tenure_group_49+,0.2762432804
+InternetService_Fiber optic,0.2389900048
+contract_tenure_Two year | 49+,0.2317225483
+InternetService_DSL,0.2189665091
+contract_tenure_Month-to-month | 0-12,0.2147958428
+total_services,0.2105521716
+internet_contract_Fiber optic | Month-to-month,0.2039842541
+tenure_group_0-12,0.1959022607
+PaperlessBilling_No,0.1803893791
+tenure_group_13-24,0.1642160219
+MultipleLines_No,0.1537612849
+Dependents_Yes,0.1206745256
+TechSupport_No internet service,0.1130141317
+StreamingMovies_No internet service,0.1130141317
+StreamingTV_No internet service,0.1130141317
+DeviceProtection_No internet service,0.1130141317
+OnlineSecurity_No internet service,0.1130141317
+OnlineBackup_No internet service,0.1130141317
+InternetService_No,0.1130141317
+StreamingTV_No,0.1008928729
+Partner_No,0.0987511468
+StreamingMovies_No,0.0960840122
+gender_Female,0.0931114653
+OnlineSecurity_No,0.0914182553
+SeniorCitizen_0,0.0888350921
+OnlineSecurity_Yes,0.0885166451
+TechSupport_Yes,0.0874185228
+gender_Male,0.0835338704
+PaymentMethod_Electronic check,0.0785201514
+contract_tenure_Month-to-month | 13-24,0.0784764002
+TechSupport_No,0.0782015350
+Partner_Yes,0.0777188461
+StreamingMovies_Yes,0.0776898168
+MultipleLines_Yes,0.0773640010
+PaymentMethod_Credit card (automatic),0.0765757879
+StreamingTV_Yes,0.0741191281
+internet_contract_DSL | Two year,0.0712046183
+PaymentMethod_Bank transfer (automatic),0.0635521827
+internet_contract_No | One year,0.0622699361
+OnlineBackup_Yes,0.0491049840
+PaymentMethod_Mailed check,0.0451368721
+internet_contract_Fiber optic | One year,0.0424467861
+SeniorCitizen_1,0.0344559378
+internet_contract_Fiber optic | Two year,0.0332698928
+Dependents_No,0.0325024302
+PhoneService_No,0.0319191789
+MultipleLines_No phone service,0.0319191789
+internet_contract_DSL | One year,0.0314932677
+OnlineBackup_No,0.0309160420
+tenure_group_25-48,0.0275885040
+internet_contract_No | Month-to-month,0.0272462191
+PhoneService_Yes,0.0251098109
+contract_tenure_Month-to-month | 49+,0.0238129491
+contract_tenure_One year | 25-48,0.0187668831
+internet_contract_DSL | Month-to-month,0.0187096811
+contract_tenure_Two year | 25-48,0.0173237641
+DeviceProtection_Yes,0.0154873803
+contract_tenure_Month-to-month | 25-48,0.0136147244
+contract_tenure_One year | 49+,0.0125544923
+contract_tenure_Two year | 13-24,0.0119977172
+contract_tenure_Two year | 0-12,0.0098771217
+DeviceProtection_No,0.0071351253
+PaperlessBilling_Yes,0.0066346945
+internet_contract_No | Two year,0.0029258842
+Contract_One year,0.0025404921
+contract_tenure_One year | 13-24,0.0016900212
+contract_tenure_One year | 0-12,0.0000265558

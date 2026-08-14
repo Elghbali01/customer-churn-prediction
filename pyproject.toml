@@ -1,0 +1,24 @@
+[project]
+name = "customer-churn-prediction"
+version = "0.1.0"
+description = "End-to-end customer churn prediction project"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "pandas>=2.2,<3.0",
+    "matplotlib>=3.8,<4.0",
+    "seaborn>=0.13,<0.14",
+    "scikit-learn>=1.8,<1.9",
+    "shap>=0.46,<1.0",
+    "fastapi>=0.116,<0.117",
+    "uvicorn>=0.35,<0.36",
+    "pydantic>=2.11,<3.0",
+    "httpx>=0.28,<1.0",
+]
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]

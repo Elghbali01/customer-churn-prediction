@@ -1,0 +1,378 @@
+{
+  "protocol": {
+    "train_rows": 5634,
+    "test_rows": 1409,
+    "fit_scope": "train_only",
+    "test_set_consumed_for_final_evaluation": true,
+    "selection_after_test": false
+  },
+  "test": {
+    "thresholds": {
+      "0.50": {
+        "threshold": 0.5,
+        "accuracy": 0.8048261178140526,
+        "precision": 0.6655518394648829,
+        "recall": 0.5320855614973262,
+        "f1": 0.5913818722139673,
+        "tn": 935,
+        "fp": 100,
+        "fn": 175,
+        "tp": 199
+      },
+      "0.30": {
+        "threshold": 0.3,
+        "accuracy": 0.7608232789212207,
+        "precision": 0.5347091932457786,
+        "recall": 0.7620320855614974,
+        "f1": 0.6284454244762955,
+        "tn": 787,
+        "fp": 248,
+        "fn": 89,
+        "tp": 285
+      }
+    },
+    "roc_auc": 0.8429460848898188,
+    "average_precision": 0.6379086489139305
+  },
+  "generalization": {
+    "roc_auc_cv_mean": 0.8468341744209609,
+    "roc_auc_test": 0.8429460848898188,
+    "roc_auc_gap_test_minus_cv": -0.0038880895311420582,
+    "average_precision_cv_mean": 0.6652375782015743,
+    "average_precision_test": 0.6379086489139305,
+    "average_precision_gap_test_minus_cv": -0.027328929287643744,
+    "threshold_0.30_oof": {
+      "precision": 0.54818401937046,
+      "recall": 0.757190635451505,
+      "f1": 0.6359550561797753
+    },
+    "threshold_0.30_test": {
+      "precision": 0.5347091932457786,
+      "recall": 0.7620320855614974,
+      "f1": 0.6284454244762955
+    }
+  },
+  "feature_count": 72,
+  "top_coefficients": {
+    "positive": [
+      {
+        "feature": "contract_tenure_Two year | 49+",
+        "coefficient": 0.8330069410866637,
+        "abs_coefficient": 0.8330069410866637,
+        "odds_ratio": 2.3002249927525957
+      },
+      {
+        "feature": "tenure_group_49+",
+        "coefficient": 0.6403968180996491,
+        "abs_coefficient": 0.6403968180996491,
+        "odds_ratio": 1.8972335865775556
+      },
+      {
+        "feature": "Contract_Month-to-month",
+        "coefficient": 0.5853592654104433,
+        "abs_coefficient": 0.5853592654104433,
+        "odds_ratio": 1.7956359796681824
+      },
+      {
+        "feature": "contract_tenure_Month-to-month | 0-12",
+        "coefficient": 0.5733151651172091,
+        "abs_coefficient": 0.5733151651172091,
+        "odds_ratio": 1.7741388763373376
+      },
+      {
+        "feature": "internet_contract_Fiber optic | Month-to-month",
+        "coefficient": 0.4862355167862151,
+        "abs_coefficient": 0.4862355167862151,
+        "odds_ratio": 1.6261829444950822
+      },
+      {
+        "feature": "InternetService_Fiber optic",
+        "coefficient": 0.477980009696951,
+        "abs_coefficient": 0.477980009696951,
+        "odds_ratio": 1.6128132424358932
+      },
+      {
+        "feature": "TotalCharges",
+        "coefficient": 0.3636778228218332,
+        "abs_coefficient": 0.3636778228218332,
+        "odds_ratio": 1.4386106519671453
+      },
+      {
+        "feature": "contract_tenure_Month-to-month | 13-24",
+        "coefficient": 0.3441968805829217,
+        "abs_coefficient": 0.3441968805829217,
+        "odds_ratio": 1.4108563783918875
+      },
+      {
+        "feature": "total_services",
+        "coefficient": 0.25035930214664043,
+        "abs_coefficient": 0.25035930214664043,
+        "odds_ratio": 1.2844868526688034
+      },
+      {
+        "feature": "contract_tenure_Two year | 25-48",
+        "coefficient": 0.24507212416258914,
+        "abs_coefficient": 0.24507212416258914,
+        "odds_ratio": 1.2777134638953134
+      }
+    ],
+    "negative": [
+      {
+        "feature": "tenure",
+        "coefficient": -1.3148071780321877,
+        "abs_coefficient": 1.3148071780321877,
+        "odds_ratio": 0.26852609597785093
+      },
+      {
+        "feature": "contract_tenure_Two year | 0-12",
+        "coefficient": -1.0705280384633582,
+        "abs_coefficient": 1.0705280384633582,
+        "odds_ratio": 0.34282744353944394
+      },
+      {
+        "feature": "contract_tenure_Two year | 13-24",
+        "coefficient": -0.9391546430328137,
+        "abs_coefficient": 0.9391546430328137,
+        "odds_ratio": 0.3909581949369303
+      },
+      {
+        "feature": "Contract_Two year",
+        "coefficient": -0.9316036162469171,
+        "abs_coefficient": 0.9316036162469171,
+        "odds_ratio": 0.3939215046745123
+      },
+      {
+        "feature": "MonthlyCharges",
+        "coefficient": -0.7773776258822729,
+        "abs_coefficient": 0.7773776258822729,
+        "odds_ratio": 0.4596097009371502
+      },
+      {
+        "feature": "internet_contract_DSL | Two year",
+        "coefficient": -0.663058008366086,
+        "abs_coefficient": 0.663058008366086,
+        "odds_ratio": 0.515273212971013
+      },
+      {
+        "feature": "tenure_group_13-24",
+        "coefficient": -0.5707458678693831,
+        "abs_coefficient": 0.5707458678693831,
+        "odds_ratio": 0.5651037887126287
+      },
+      {
+        "feature": "InternetService_DSL",
+        "coefficient": -0.5270037600910843,
+        "abs_coefficient": 0.5270037600910843,
+        "odds_ratio": 0.5903712161067444
+      },
+      {
+        "feature": "tenure_group_0-12",
+        "coefficient": -0.49617350988346826,
+        "abs_coefficient": 0.49617350988346826,
+        "odds_ratio": 0.6088559893755896
+      },
+      {
+        "feature": "internet_contract_No | One year",
+        "coefficient": -0.4579484312680648,
+        "abs_coefficient": 0.4579484312680648,
+        "odds_ratio": 0.6325800967196922
+      }
+    ],
+    "absolute": [
+      {
+        "feature": "tenure",
+        "coefficient": -1.3148071780321877,
+        "abs_coefficient": 1.3148071780321877,
+        "odds_ratio": 0.26852609597785093
+      },
+      {
+        "feature": "contract_tenure_Two year | 0-12",
+        "coefficient": -1.0705280384633582,
+        "abs_coefficient": 1.0705280384633582,
+        "odds_ratio": 0.34282744353944394
+      },
+      {
+        "feature": "contract_tenure_Two year | 13-24",
+        "coefficient": -0.9391546430328137,
+        "abs_coefficient": 0.9391546430328137,
+        "odds_ratio": 0.3909581949369303
+      },
+      {
+        "feature": "Contract_Two year",
+        "coefficient": -0.9316036162469171,
+        "abs_coefficient": 0.9316036162469171,
+        "odds_ratio": 0.3939215046745123
+      },
+      {
+        "feature": "contract_tenure_Two year | 49+",
+        "coefficient": 0.8330069410866637,
+        "abs_coefficient": 0.8330069410866637,
+        "odds_ratio": 2.3002249927525957
+      },
+      {
+        "feature": "MonthlyCharges",
+        "coefficient": -0.7773776258822729,
+        "abs_coefficient": 0.7773776258822729,
+        "odds_ratio": 0.4596097009371502
+      },
+      {
+        "feature": "internet_contract_DSL | Two year",
+        "coefficient": -0.663058008366086,
+        "abs_coefficient": 0.663058008366086,
+        "odds_ratio": 0.515273212971013
+      },
+      {
+        "feature": "tenure_group_49+",
+        "coefficient": 0.6403968180996491,
+        "abs_coefficient": 0.6403968180996491,
+        "odds_ratio": 1.8972335865775556
+      },
+      {
+        "feature": "Contract_Month-to-month",
+        "coefficient": 0.5853592654104433,
+        "abs_coefficient": 0.5853592654104433,
+        "odds_ratio": 1.7956359796681824
+      },
+      {
+        "feature": "contract_tenure_Month-to-month | 0-12",
+        "coefficient": 0.5733151651172091,
+        "abs_coefficient": 0.5733151651172091,
+        "odds_ratio": 1.7741388763373376
+      }
+    ]
+  },
+  "shap": {
+    "version": "0.51.0",
+    "shape": [
+      1409,
+      72
+    ],
+    "top_global": [
+      {
+        "feature": "tenure",
+        "mean_abs_shap": 1.1760331067480423
+      },
+      {
+        "feature": "MonthlyCharges",
+        "mean_abs_shap": 0.6648954630063719
+      },
+      {
+        "feature": "Contract_Two year",
+        "mean_abs_shap": 0.314741851981568
+      },
+      {
+        "feature": "TotalCharges",
+        "mean_abs_shap": 0.298741034852799
+      },
+      {
+        "feature": "Contract_Month-to-month",
+        "mean_abs_shap": 0.29154131873273775
+      },
+      {
+        "feature": "tenure_group_49+",
+        "mean_abs_shap": 0.2762432803923257
+      },
+      {
+        "feature": "InternetService_Fiber optic",
+        "mean_abs_shap": 0.23899000484847677
+      },
+      {
+        "feature": "contract_tenure_Two year | 49+",
+        "mean_abs_shap": 0.2317225483029937
+      },
+      {
+        "feature": "InternetService_DSL",
+        "mean_abs_shap": 0.21896650906325144
+      },
+      {
+        "feature": "contract_tenure_Month-to-month | 0-12",
+        "mean_abs_shap": 0.21479584280604905
+      },
+      {
+        "feature": "total_services",
+        "mean_abs_shap": 0.21055217157211265
+      },
+      {
+        "feature": "internet_contract_Fiber optic | Month-to-month",
+        "mean_abs_shap": 0.2039842540612757
+      },
+      {
+        "feature": "tenure_group_0-12",
+        "mean_abs_shap": 0.19590226066946465
+      },
+      {
+        "feature": "PaperlessBilling_No",
+        "mean_abs_shap": 0.18038937910881964
+      },
+      {
+        "feature": "tenure_group_13-24",
+        "mean_abs_shap": 0.1642160218837832
+      }
+    ],
+    "high_risk_client": {
+      "test_position": 1090,
+      "probability": 0.8860459372635693,
+      "positive_factors": [
+        {
+          "feature": "tenure",
+          "shap_value": 1.719603780297336
+        },
+        {
+          "feature": "contract_tenure_Month-to-month | 0-12",
+          "shap_value": 0.45291898044259526
+        },
+        {
+          "feature": "internet_contract_Fiber optic | Month-to-month",
+          "shap_value": 0.3403648617503506
+        },
+        {
+          "feature": "Contract_Month-to-month",
+          "shap_value": 0.28097244739701277
+        },
+        {
+          "feature": "InternetService_Fiber optic",
+          "shap_value": 0.2389900048484755
+        }
+      ],
+      "negative_factors": [
+        {
+          "feature": "MonthlyCharges",
+          "shap_value": -0.7563426689186067
+        },
+        {
+          "feature": "tenure_group_0-12",
+          "shap_value": -0.3919770728079399
+        },
+        {
+          "feature": "TotalCharges",
+          "shap_value": -0.35957835289180745
+        },
+        {
+          "feature": "tenure_group_49+",
+          "shap_value": -0.19852301361089122
+        },
+        {
+          "feature": "contract_tenure_Two year | 49+",
+          "shap_value": -0.12495104116299956
+        }
+      ],
+      "prediction": 1,
+      "true_class": 1
+    }
+  },
+  "serialization": {
+    "pipeline": "models/churn_pipeline.joblib",
+    "metadata": "models/model_metadata.json",
+    "round_trip_rows": 20,
+    "max_probability_difference": 0.0
+  },
+  "figures": [
+    "reports/figures/final_test_confusion_threshold_030.png",
+    "reports/figures/final_test_roc_curve.png",
+    "reports/figures/final_test_pr_curve.png",
+    "reports/figures/final_logistic_coefficients.png",
+    "reports/figures/final_shap_global_bar.png",
+    "reports/figures/final_shap_summary.png",
+    "reports/figures/final_shap_high_risk_client.png"
+  ]
+}
